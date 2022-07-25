@@ -1,18 +1,17 @@
 package com.bridgelabz;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class AddressBookService {
-
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program on JDBC ...");
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/address_book_service", "root", "July@135");
             System.out.println("Connection Done...");
             Statement statement = connection.createStatement();
+            statement.execute("UPDATE  address_book SET firstName='Bobby' WHERE firstName='Sri'");
             ResultSet resultSet = statement.executeQuery("SELECT * FROM address_book");
             while (resultSet.next()) {
                 System.out.println(resultSet.getString(1)
@@ -24,12 +23,12 @@ public class AddressBookService {
                         + " " + resultSet.getInt(7)
                         + " " + resultSet.getInt(8)
                         + " " + resultSet.getString(9)
-                        + " " + resultSet.getString(10)
-                        + " " + resultSet.getInt(11));
+                        + " " + resultSet.getString(10));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
